@@ -19,22 +19,21 @@ class AuthController extends Controller
 {
 
 
-    public function CustomRegistration()
+    public function CustomRegistration(Request $request)
     {
-    //       $request->validate([
-            
-    //         'email' => 'required|email|unique:users',
-            
-    //     ]);
+          $request->validate([
+            'email' => 'required|email|unique:users',
+        ]);
 
 
-    //     $data = $request->all();
+        $data = $request->all();
 
-    //     User::create([
+        User::create([
             
-    //         'email' => $data['email'],
+            'email' => $data['email'],
+            // 'password' => Str::random(10),
             
-    //     ]);
+        ]);
 
     //     $user = User::find(1)->created_at;
 
@@ -51,9 +50,9 @@ class AuthController extends Controller
          env('APP_URL')."/?id=".$ne 
      *  */ 
 
-     
+
         
-        return response( );
+        return response( ["mass" => "it is ok"]);
     }
 
     // public function create(array $data)

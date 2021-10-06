@@ -18,13 +18,10 @@ class AppUser extends Model
 
     protected $fillable = [
         'email',
-       
     ];
 
     protected $primaryKey = 'uuid';
-
     protected $keyType = 'string';
-
     public $incrementing = false;
 
 }

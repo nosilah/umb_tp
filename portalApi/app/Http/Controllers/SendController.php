@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Mail\SenderLink;
-
-use App\Mail\SendLoginLink;
-
 use Illuminate\Support\Facades\Mail;
 
 class SendController extends Controller
@@ -16,5 +13,14 @@ class SendController extends Controller
         Mail::to('alnosila.abd@gmail.com')->send(new SenderLink($url));
 
         return 'link for login';
+    }
+
+
+
+    public function sendLinkToEmail($email, $randomString){
+
+        $link = env('APP_URL/'. $randomString);
+
+        Mail::to($email)->send(new SenderLink($link));
     }
 }
