@@ -6,7 +6,7 @@ namespace App\Models;
 use Illuminate\Support\Str;
 use App\Models\Traits\HasSecret;
 use App\Models\Traits\HasUuid;
-use Laravel\Passport\HasApiTokens;
+use Laravel\Passport\HasApiTokens;  
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,7 +15,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasSecret, HasUuid;
+    use  HasFactory, Notifiable, HasApiTokens;
 
     
     /**
@@ -66,8 +66,8 @@ class User extends Authenticatable
     // }
     
 
-    protected $primaryKey = 'password';
-    protected $keyType = 'string';
-    public $incrementing = false;
+    // protected $primaryKey = 'uuid';
+    // protected $keyType = 'string';
+    // public $incrementing = false;
 
 }

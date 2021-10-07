@@ -6,16 +6,18 @@ use App\Models\User;
 use App\Mail\SenderLink;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\TemporaryLink;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Laravel\Passport\Bridge\AuthCode;
 
 class LoginController extends Controller
 {
 
 
-    public function login(Request $request)
+    public function getAuthlink(Request $request)
     {
 
         $data = $request->validate([
@@ -29,80 +31,53 @@ class LoginController extends Controller
             ]);
         }
 
+        $temporary_link = new TemporaryLink();
+
         $user = User::where('email', $data['email'])->get();
-        $created_at =  $this->findPrepority($user, "created_at");
-        $randomString = $this->findPrepority($user, "password");
+        $id = $temporary_link->findPrepority($user, "id");
+        $newlink = $temporary_link->firstOrCreate(['user_id' => $id]);
+
+        $newlink->update(['temporary_secret_code' => $temporary_link->generateRandomString()]);
+
+        $randomString = $newlink->temporary_secret_code;
+
+        $link_id = $newlink->id;
+        $url = $temporary_link->sendURLToEmail($data['email'], $link_id, $randomString);
 
 
-        if ($this->checkTimeLink($created_at)) {
-            $this->sendLinkToEmail($data['email'], $randomString);
-            return response(["massage" => "check your email we are you are aleary register"]);
+        // $user = User::find($id);
+        
+        // $token = Auth::user()->createToken('authToken')->accessToken;
+
+        return response([ "url" => Auth::user()]);
+
+    }
+
+
+    public function login($id, $authCode)
+    {
+
+        $logindata = TemporaryLink::find($id);
+
+        if ($logindata->temporary_secret_code === $authCode) {
+            if ($logindata->checkTimeLink($logindata->updated_at)) {
+
+             $user = User::find($logindata->user_id);
+
+                $token = $user->createToken('authToken')->accessToken;
+                return response()->json(['user' => User::find($logindata->user_id), 'accessToken' => $token]);
+            }
+            
+           
+            
+            return response()->json([
+                'user' => Auth::user()
+            ]);
+
         }
 
 
-        $randomString = $this->generateRandomString();
-        $url = $this->sendLinkToEmail($data['email'], $randomString);
-
-       
-
-
-
-        return response(["massage" => "check you email", 'url' => $url]);
-    }
-
-
-    /**
-     * to get prepority of  user collection 
-     * @return prepority of user
-     */
-
-    public function findPrepority($colection, $prep)
-    {
-
-        foreach ($colection as $userpre) return $userpre["{$prep}"];
-    }
-
-
-    /**
-     * send mail $randomString to $email  
-     * @return void
-     */
-
-    public function sendLinkToEmail($email, $randomString)
-    {
-
-        $link = env('APP_URL')."/api/auth/". $randomString;
-
-        Mail::to($email)->send(new SenderLink($link));
-
-        return $link;
-    }
-
-
-
-    /**
-     * check sentive/time 
-     * @return bool
-     */
-
-    public function checkTimeLink($created_at)
-    {
-
-
-        if ((now()->diffInSeconds($created_at)) > env('SENTIVE_TIME')) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * generate random string 
-     * @return string random min_length=50, max_length=150
-     */
-
-    public function generateRandomString(){
-
-        return Str::random(random_int(50, 150));
+        
+        return "the link dos't exist";
     }
 }

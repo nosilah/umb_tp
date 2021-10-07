@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\LoginController;
 
 /*
@@ -25,8 +26,8 @@ use App\Http\Controllers\Api\LoginController;
 
 Route::post('register', [\App\Http\Controllers\Auth\AuthController::class, 'CustomRegistration']);
 
-Route::post('login', [LoginController::class, 'login']);
+Route::post('getauthlink', [LoginController::class, 'getAuthlink']);
 
-Route::get('/auth/{id}', function ($id) {
-    return $id;
-});
+Route::get('/auth/{id}/{authCode}', [LoginController::class, 'login']);
+
+Route::middleware('auth:api')->get('/all', [UserController::class, 'index']);
