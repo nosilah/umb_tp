@@ -31,3 +31,5 @@ Route::post('getauthlink', [LoginController::class, 'getAuthlink']);
 Route::get('/auth/{id}/{authCode}', [LoginController::class, 'login']);
 
 Route::middleware('auth:api')->get('/all', [UserController::class, 'index']);
+
+Route::get('/users', [UserController::class, 'index']);

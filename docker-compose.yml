@@ -8,10 +8,13 @@ services:
     working_dir: /var/www/html
     networks:
       - app-network
+    ports:
+      - 9001:8000
     # command: chown -R www-data:www-data .
     
   nginx:
     image: nginx
+    container_name: nginx
     ports:
       - "8081:80"
     volumes:
@@ -62,19 +65,32 @@ services:
 
   portal:
     # image: node:16.6.1-alpine3.12
-    
+    container_name: portal
     build: 
       context: .
-      dockerfile: ../portal/Dockerfile
+      dockerfile: ./portal/Dockerfile
     command: sh -c " npm run server "
     volumes:
-      - ../portal:/usr/app
+      - ./portal:/usr/app
     tty: true
     ports:
-      - "3001:3000"
-    # networks:
-    #   - app-network
-    
+      - "3000:3000"
+    networks:
+      - app-network
+
+
+  # ubuntu:
+  #   container_name: ubuntu
+  #   image: ubuntu
+  #   restart: on-failure
+  #   command: ["sleep","infinity"]
+  #   volumes:
+  #     - ./portal:/home/app
+  #   tty: true
+  #   ports:
+  #     - "3003:3000"
+  #   networks:
+  #     - app-network
   
 #Docker Networks
 networks:

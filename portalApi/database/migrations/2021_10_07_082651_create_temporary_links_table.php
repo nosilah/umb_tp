@@ -17,6 +17,7 @@ class CreateTemporaryLinksTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('temporary_secret_code')->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
