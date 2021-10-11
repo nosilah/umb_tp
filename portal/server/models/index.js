@@ -46,6 +46,8 @@
 
 import fetch from 'node-fetch'
 
-fetch('http://app:9000/api/users')
+let fakeRESTApi = 'https://jsonplaceholder.typicode.com/users';
+
+fetch('http://localhost:8081/api/users')
     .then(res => res.json())
     .then(json => console.log(json))

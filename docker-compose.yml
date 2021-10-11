@@ -9,7 +9,7 @@ services:
     networks:
       - app-network
     ports:
-      - 9001:8000
+      - 9001:9000
     # command: chown -R www-data:www-data .
     
   nginx:
@@ -61,8 +61,6 @@ services:
       - "8025:8025"
     networks:
       - app-network
-    
-
   portal:
     build: 
       context: .
