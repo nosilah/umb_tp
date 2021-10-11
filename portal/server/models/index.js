@@ -1,8 +1,16 @@
-// // const fetch = require('node-fetch');
-// import fetch from 'node-fetch'
-// // var fetch = require('node-fetch')
+import fetch from 'node-fetch'
+
+const fakeRESTApi = 'https://jsonplaceholder.typicode.com/users';
+const urlNginx = 'http://localhost:8081/api/users';
+
+fetch('http://app:9001/api/users')
+    .then(res => res.json())
+    .then(json => console.log(json))
 
 
+
+
+    
 
 // fetch('http://app:9000/api/users')
 //         .then(res => res.json())
@@ -43,11 +51,3 @@
 // } catch (err) {
 // 	console.error(err.stack);
 // }
-
-import fetch from 'node-fetch'
-
-let fakeRESTApi = 'https://jsonplaceholder.typicode.com/users';
-
-fetch('http://localhost:8081/api/users')
-    .then(res => res.json())
-    .then(json => console.log(json))
