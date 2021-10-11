@@ -64,11 +64,6 @@ services:
     
 
   portal:
-<<<<<<< HEAD
-    # image: node:16.6.1-alpine3.12
-    container_name: portal
-=======
->>>>>>> 4ec308949fc9cf574ed0a92319d91176126ca275
     build: 
       context: .
       dockerfile: ./portal/Dockerfile
@@ -77,30 +72,10 @@ services:
       - ./portal:/usr/app
     tty: true
     ports:
-<<<<<<< HEAD
-      - "3000:3000"
-    networks:
-      - app-network
-
-
-  # ubuntu:
-  #   container_name: ubuntu
-  #   image: ubuntu
-  #   restart: on-failure
-  #   command: ["sleep","infinity"]
-  #   volumes:
-  #     - ./portal:/home/app
-  #   tty: true
-  #   ports:
-  #     - "3003:3000"
-  #   networks:
-  #     - app-network
-=======
       - "3001:3000"
     networks:
       - app-network
     
->>>>>>> 4ec308949fc9cf574ed0a92319d91176126ca275
   
 #Docker Networks
 networks:
