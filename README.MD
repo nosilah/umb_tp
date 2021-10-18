@@ -17,7 +17,7 @@ docker exec -it portalapi php artisan migrate
 ```
 
 
-## 4- Install passport secret-key
+## 4. Install passport secret-key
 Only after successfully runed migrations, for auth-service in portalapi I use laravel/passport and you have to run the commands necessary to prepare Passport for use
 ```
 docker exec -it portalapi php artisan passport:install
