@@ -1,14 +1,28 @@
 import fetch from 'node-fetch'
+// import Headers from 'node-fetch'
+import {Headers} from 'node-fetch'
+
 
 const fakeRESTApi = 'https://jsonplaceholder.typicode.com/users';
-const urlNginx = 'http://localhost:8081/api/users';
+const urlNginx = 'http://portalapi:9000/api/users';
 
-fetch('http://app:9001/api/users')
+// const meta = {
+// 	'Content-Type': 'application/json',
+// 	'Breaking-Bad': '<3',
+//     'Accept-Charset': 'utf-8',
+//     'Keep-Alive': 300,
+//     'Connection' : 'keep-alive',
+//     'Pragma' : 'no-cache',
+//     'Cache-Control': 'no-cache'
+// };
+
+// const headers = new Headers(meta);
+fetch(urlNginx)
     .then(res => res.json())
     .then(json => console.log(json))
 
 
-
+// console.log(headers);
 
     
 

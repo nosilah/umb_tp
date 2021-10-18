@@ -1,8 +1,9 @@
 version: '3.8'
 services:
-  php:
+  #service-laravel
+  portalapi:
     image: repox/laravel-dev-php:8.0
-    container_name: app
+    container_name: portalapi
     volumes:
       - ./portalApi:/var/www/html
     working_dir: /var/www/html
@@ -11,6 +12,21 @@ services:
     ports:
       - 9001:9000
     # command: chown -R www-data:www-data .
+    
+  #service for node app 
+  portal:
+    build: 
+      context: .
+      dockerfile: ./portal/Dockerfile
+    container_name: portal
+    command: sh -c " npm run server "
+    volumes:
+      - ./portal:/usr/app
+    tty: true
+    ports:
+      - "3001:3000"
+    networks:
+      - app-network
     
   nginx:
     image: nginx
@@ -27,7 +43,7 @@ services:
     image: mysql:8.0
     container_name: db
     links:
-      - php
+      - portalapi
     ports:
       - "3306:3306"
     volumes:
@@ -54,27 +70,12 @@ services:
     networks:
       - app-network
   mailhog:
-    container_name: mailhog
     image: mailhog/mailhog:v1.0.0
     ports:
       - "1025:1025"
       - "8025:8025"
     networks:
       - app-network
-  portal:
-    build: 
-      context: .
-      dockerfile: ./portal/Dockerfile
-    command: sh -c " npm run server "
-    volumes:
-      - ./portal:/usr/app
-    tty: true
-    ports:
-      - "3001:3000"
-    networks:
-      - app-network
-    
-  
 #Docker Networks
 networks:
   app-network:

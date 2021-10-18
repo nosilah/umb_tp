@@ -1,0 +1,20 @@
+{
+  "name": "test_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "app": "cd portalApi && composer install && cp .env.example .env && cd ../portal && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nosilah/umb_tp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nosilah/umb_tp/issues"
+  },
+  "homepage": "https://github.com/nosilah/umb_tp#readme"
+}
