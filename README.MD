@@ -23,17 +23,19 @@ Only after successfully runed migrations, for auth-service in portalapi I use la
 docker exec -it portalapi php artisan passport:install
 ``` 
 
-
-###   **show routing map**
+---
+ 
+## **Additional notes**
+* ###   **show routing map**
 
 ```
 docker exec -it portalapi php artisan route:list
 ```
-###   **for testing portalapi**
+* ###   **for testing portalapi**
 
 for example in postaman you can use http://localhost:8081/ + url form routing map
 
-### **SMTP server**
+* ### **SMTP server**
 As an SMTP server I use locally [Mailhog](http://localhost:8025) by address <a href="http://localhost:8025">http://localhost:8025 </a>
 
 ---
