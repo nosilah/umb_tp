@@ -36,7 +36,7 @@ docker exec -it portalapi php artisan route:list
 for example in postaman you can use http://localhost:8081/ + url form routing map
 
 * ### **SMTP server**
-As an SMTP server I use locally [Mailhog](http://localhost:8025), you can open received  messages by address <a href="http://localhost:8025">http://localhost:8025 </a>
+As an SMTP server I use locally [Mailhog](http://localhost:8025), you can check received  messages by address <a href="http://localhost:8025">http://localhost:8025 </a>
 
 ---
 ###   **Project includes**
