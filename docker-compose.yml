@@ -19,7 +19,7 @@ services:
       context: .
       dockerfile: ./portal/Dockerfile
     container_name: portal
-    command: sh -c " npm run server "
+    # command: sh -c " npm run server "
     volumes:
       - ./portal:/usr/app
     tty: true

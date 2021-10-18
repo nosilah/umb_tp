@@ -17,7 +17,7 @@ const urlNginx = 'http://portalapi:9000/api/users';
 // };
 
 // const headers = new Headers(meta);
-fetch(urlNginx)
+fetch(fakeRESTApi)
     .then(res => res.json())
     .then(json => console.log(json))
 
