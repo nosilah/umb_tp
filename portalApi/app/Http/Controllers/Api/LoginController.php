@@ -49,7 +49,7 @@ class LoginController extends Controller
         
         // $token = Auth::user()->createToken('authToken')->accessToken;
 
-        return response([ "url" => Auth::user()]);
+        return response([ "url" => $url]);
 
     }
 

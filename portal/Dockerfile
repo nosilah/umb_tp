@@ -1,6 +1,7 @@
-FROM node:14-alpine
-WORKDIR /usr/app
+FROM alnosila/node
 
-# RUN npm install nodemon -g --quiet
+WORKDIR /var/www
+
+RUN apt-get update && npm install -g --force nodemon
 
 # EXPOSE 3000
