@@ -1,15 +1,17 @@
 <template>
   <div id="app">
-    <nav v-if="currentUser" class="navbar navbar-expand navbar-dark bg-dark">
+
+
+        
+
+    <nav v-if="!currentUser" class="navbar navbar-expand navbar-dark bg-dark">
       
       <div class="navbar-nav mr-auto">
-        <!-- <li class="nav-item">
+        <li class="nav-item">
           <router-link to="/home" class="nav-link">
             <font-awesome-icon icon="home" /> Home
           </router-link>
-        </li> -->
-       
-      
+        </li> 
         <li class="nav-item">
           <router-link v-if="currentUser" to="/user" class="nav-link">User</router-link>
         </li>

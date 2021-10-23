@@ -78,8 +78,8 @@ export default {
       this.$store.dispatch("auth/register", user).then(
         () => {
           // this.$router.push("/profile");
-          // this.$router.push("massage");
-          // alert('check you email')
+          this.$router.push("/massage");
+          alert('check you email')
           console.log('it is login');
         },
         (error) => {
