@@ -49,14 +49,17 @@ class LoginController extends Controller
         
         // $token = Auth::user()->createToken('authToken')->accessToken;
 
-        return response([ "url" => $url]);
-
+        return response()->json([
+            "massage" => 'check_your_email'
+        ]);
     }
+
+
 
 
     public function login($id, $authCode)
     {
-
+        
         $logindata = TemporaryLink::find($id);
 
         if ($logindata->temporary_secret_code === $authCode) {
@@ -65,19 +68,21 @@ class LoginController extends Controller
              $user = User::find($logindata->user_id);
 
                 $token = $user->createToken('authToken')->accessToken;
-                return response()->json(['user' => User::find($logindata->user_id), 'accessToken' => $token]);
+                return response()->json([
+                    'user' => User::find($logindata->user_id), 
+                    'accessToken' => $token,
+                    'auth_link' => ""
+                ]);
             }
             
-           
-            
             return response()->json([
-                'user' => Auth::user()
+                'auth_link' => "is_overdue"
             ]);
 
         }
 
-
-        
-        return "the link dos't exist";
+        return response()->json([
+            'auth_link' => "is_falid"
+        ]);
     }
 }

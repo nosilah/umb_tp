@@ -1,24 +1,20 @@
 <template>
   <div id="app">
-
-
-        
-
-    <nav v-if="!currentUser" class="navbar navbar-expand navbar-dark bg-dark">
-      
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
           <router-link to="/home" class="nav-link">
             <font-awesome-icon icon="home" /> Home
           </router-link>
-        </li> 
+        </li>
         <li class="nav-item">
-          <router-link v-if="currentUser" to="/user" class="nav-link">User</router-link>
+          <router-link v-if="currentUser" to="/user" class="nav-link"
+            >User</router-link
+          >
         </li>
       </div>
 
       <div v-if="!currentUser" class="navbar-nav ml-auto">
-      
         <li class="nav-item">
           <router-link to="/login" class="nav-link">
             <font-awesome-icon icon="sign-in-alt" /> Login
@@ -30,7 +26,7 @@
         <li class="nav-item">
           <router-link to="/profile" class="nav-link">
             <font-awesome-icon icon="user" />
-            {{ currentUser.username }}
+            Profile
           </router-link>
         </li>
         <li class="nav-item">
@@ -48,18 +44,27 @@
 </template>
 
 <script>
+// import axios from 'axios';
+
 export default {
   computed: {
     currentUser() {
       return this.$store.state.auth.user;
     },
-
   },
   methods: {
     logOut() {
-      this.$store.dispatch('auth/logout');
-      this.$router.push('/login');
-    }
-  }
+      this.$store.dispatch("auth/logout");
+      this.$router.push("/login");
+    },
+  },
+
+  // mounted(){
+  //   axios.get('http://127.0.0.1:3001' + "/check_auth").then((response) => {
+  //     if (response.data.email) {
+  //       localStorage.setItem("user", JSON.stringify(response.data));
+  //     }
+  //   });
+  // },
 };
 </script>

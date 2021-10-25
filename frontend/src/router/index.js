@@ -11,13 +11,18 @@ const BoardUser = () => import("../components/BoardUser.vue")
 
 
 const routes = [
-  {
-    path: "/:authkey",
-    component: Test
-  },
+  // {
+  //   path: "/test",
+  //   // alias: "/api/auth/:id/:authkey",
+  //   component: Test
+  // },
 
   {
     path: "/",
+    component: Home,
+  },
+  {
+    path: "/home",
     component: Home,
   },
  
@@ -28,6 +33,11 @@ const routes = [
   {
     path: "/register",
     component: Register,
+  },
+  {
+    path: '/api/auth/:id/:authkey',
+    // alias: "/api/auth/:id/:authkey",
+    component: Test
   },
  
   {
@@ -49,25 +59,27 @@ const routes = [
 
   {
     path: "/massage",
-    name: 'massage',
+    name: 'mass',
     component: massage,
   },
 ];
 
 const router = createRouter({
+  // mode: 'history',
+
   history: createWebHistory(),
   routes,
 });
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/login', '/register', '/home', '/massage'];
-  const authRequired = !publicPages.includes(to.path);
+  const publicPages = ['/user', '/profile'];
+  const authRequired = publicPages.includes(to.path);
   const loggedIn = localStorage.getItem('user');
 
 //   // trying to access a restricted page + not logged in
 //   // redirect to login page
   if (authRequired && !loggedIn) {
-    // next('/login');
+    next('/login');
   } else {
     next();
   }

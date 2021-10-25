@@ -8,8 +8,25 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
+const  history  = require('connect-history-api-fallback')
+
 
 const app = express();
+const staticFileMiddleware = express.static(path.join(__dirname, 'public'));
+// app.use(staticFileMiddleware);
+app.use(history({
+  // index: 'index.html',
+  // verbose: true,
+  rewrites: [
+    {
+      from: '/^\/api\/auth\/(?:([^\/]+?))\/(?:([^\/]+?))\/?$/i',
+      to: function(context) {
+          return context.parsedUrl.path
+      }
+    }
+  ]
+}));
+app.use(staticFileMiddleware);
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
@@ -20,11 +37,14 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/', authRouter);
+
+// app.use('/api/auth/:id/:authkey', authRouter);
+
 
 
 // catch 404 and forward to error handler

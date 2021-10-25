@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch')
@@ -12,45 +11,81 @@ router.post('/register', async (req, res) => {
     }
 
     let responce = await fetch('http://nginx/api/getauthlink', {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(res => res.json())
-        // .catch(err => console.log(err))
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(res => res.json())
+    // .catch(err => console.log(err))
 
     console.log(responce.status);
-    res.send(responce)
+    res.json(responce)
 });
 
-router.get('/api/auth/:id/:authkey', async (req, res) => {
+router.get('/api/auth/:id/:authkey/', async (req, res) => {
 
-    let params = {
-        "id" : req.params.id,
-        "authkey": req.params.authkey,
-    }
     let responce = await fetch(`http://nginx/api/auth/${req.params.id}/${req.params.authkey}`)
-    .then(res => res.json())
-    .catch(err => console.log(err))
+        .then(res => res.json())
+        .catch(err => console.log(err))
 
-    console.log(responce.accessToken);
-    let auth = {
-        "accessToken" : responce.accessToken
+    console.log('get the link');
+    console.log(responce);
+
+    if (responce.accessToken) {
+       
+        res.json({
+            "id": responce.user.id,
+            "email": responce.user.email,
+            "accessToken": responce.accessToken
+        })
+    } else {
+        res.json({
+            responce
+        })
+
     }
-    res.cookie("authPortal", auth)
-    res.redirect('/' + 'heretestmusldkf')
+
 
 })
+
+router.get('/home', (req, res) => res.redirect('/'))
 
 router.get('/logout', (req, res) => {
 
-    console.log(req.cookies.authPortal.accessToken);
-    // res.clearCookie('AuthPortalApi')
-    res.send('you are logout')
+
+
+    res.json('you are logout')
 })
 
-// router.get('/')
+router.get('/check_auth', async (req, res) => {
+    if (req.cookies.authPortal) {
+
+        headers = {
+            Authorization: "Bearer " + req.cookies.authPortal.accessToken
+        }
+        let responceApi = await fetch('http://nginx/api/check_auth', {
+            headers: headers
+        }).then(res => res.json()).catch(err => console.log(err));
+
+        console.log(res);
+        //    console.log("Bearer " + req.cookies.authPortal.accessToken);
+        if (responceApi) {
+            res.send(responceApi.user)
+        } else {
+            res.send('your token not exexts')
+        }
+    } else {
+        res.redirect('/')
+    }
+
+})
+
+
+
+
+router.get('/test', (req, res) => res.redirect('/'))
+
 
 // router.get('/profile', (req, res) => res.send(console.log(res)))
 

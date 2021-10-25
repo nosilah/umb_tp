@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "app": "cd portalApi && composer install && cp .env.example .env && cd ../portal && npm install"
+ 
   },
   "repository": {
     "type": "git",

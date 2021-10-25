@@ -4,7 +4,8 @@ const path = require('path');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.send(path.join(__dirname, 'public'));
+  // res.send(path.join(__dirname, 'public'));
+  res.render(path.join(__dirname + '/public'))
 });
 
 

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\LoginController;
@@ -30,6 +31,12 @@ Route::post('getauthlink', [LoginController::class, 'getAuthlink']);
 
 Route::get('/auth/{id}/{authCode}', [LoginController::class, 'login']);
 
-Route::middleware('auth:api')->get('/all', [UserController::class, 'index']);
+Route::middleware('auth:api')->get('/all', [UserController::class, 'test']);
 
 Route::get('/users', [UserController::class, 'index']);
+
+Route::middleware('auth:api')->get('/check_auth', function(){
+    return response(['status' => true ,
+'user' => Auth::user()
+]);
+});

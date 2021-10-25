@@ -15,5 +15,8 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
     "node-fetch": "^2.0.0"
+  },
+  "devDependencies": {
+    "connect-history-api-fallback": "^1.6.0"
   }
 }

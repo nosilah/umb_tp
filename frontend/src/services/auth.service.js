@@ -17,6 +17,9 @@ class AuthService {
   }
 
   logout() {
+    axios.get(API_URL + '/logout').then(response => {
+      console.log("you are logout" + response)
+    })
     localStorage.removeItem('user');
   }
 
@@ -30,6 +33,17 @@ class AuthService {
 
         return response.data;
       });
+  }
+  getAuthUser() {
+    return axios.get(API_URL + '/check_auth').then(response => {
+      console.log({
+        'user': response.data
+      })
+      if(response.data.email){
+        localStorage.setItem('user', JSON.stringify(response.data));
+      }
+      return response.data;
+    })
   }
 
 }
