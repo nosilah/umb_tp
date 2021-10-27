@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 v-if="currentUser">hello, you are in your page</h3>
+    <h3 v-if="currentUser">hello, you are in your home page</h3>
     <h3 v-if="!currentUser">you are not login</h3>
   </div>
 </template>

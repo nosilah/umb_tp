@@ -14,6 +14,7 @@
       <strong>Email:</strong>
       {{currentUser.email}}
     </p>
+    {{getAuthUser}}
     <!-- <strong>Authorities:</strong>
     <ul>
       <li v-for="role in currentUser.roles" :key="role">{{role}}</li>
@@ -22,17 +23,29 @@
 </template>
 
 <script>
+
+import {mapGetters} from 'vuex';
 export default {
   name: 'Profile',
   computed: {
+    // getUser(){
+    //   return this.$store.getters.auth.getAuthUser
+    // },
+
+    ...mapGetters(['auth/getAuthUser']),
     currentUser() {
-      return this.$store.state.auth.user;
-    }
+      console.log(this['auth/getAuthUser']);
+      return this['auth/getAuthUser'];
+    },
+    // getuser(){
+    //   return this.getAuthUser;
+    // }
   },
   mounted() {
     if (!this.currentUser) {
       this.$router.push('/login');
     }
+
   }
 };
 </script>

@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <nav class="navbar navbar-expand  navbar-dark ownstylenav">
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
           <router-link to="/home" class="nav-link">
             <font-awesome-icon icon="home" /> Home
           </router-link>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <router-link v-if="currentUser" to="/user" class="nav-link"
             >User</router-link
           >
-        </li>
+        </li> -->
       </div>
 
       <div v-if="!currentUser" class="navbar-nav ml-auto">
@@ -68,3 +68,9 @@ export default {
   // },
 };
 </script>
+<style>
+ .ownstylenav {
+   background-color: #5A009D;
+   color: #fff
+ }
+</style>

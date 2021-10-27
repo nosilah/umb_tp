@@ -3,25 +3,27 @@ import AuthService from '../services/auth.service';
 // AuthService.getAuthUser();
 const user =JSON.parse(localStorage.getItem('user')) ;
 const initialState = user
-  ? { status: { loggedIn: true }, user }
-  : { status: { loggedIn: false }, user: null };
+  ? {  loggedIn: true , user} : {loggedIn: false , user: null };
 
 export const auth = {
   namespaced: true,
   state: initialState,
+  getters: {
+    getAuthUser(state){ return state.user}
+  },
   actions: {
-    // login({ commit }, user) {
-    //   return AuthService.getAuthUser().then(
-    //     user => {
-    //       commit('loginSuccess');
-    //       return Promise.resolve();
-    //     },
-    //     error => {
-    //       commit('loginFailure');
-    //       return Promise.reject(error);
-    //     }
-    //   );
-    // },
+    login({ commit }, {id, authkey}) {
+      return AuthService.login(id, authkey).then(
+        user => {
+          commit('loginSuccess');
+          return Promise.resolve(user);
+        },
+        error => {
+          commit('loginFailure');
+          return Promise.reject(error);
+        }
+      );
+    },
     logout({ commit }) {
       AuthService.logout();
       commit('logout');
@@ -41,22 +43,22 @@ export const auth = {
   },
   mutations: {
     loginSuccess(state, user) {
-      state.status.loggedIn = true;
+      state.loggedIn = true;
       state.user = user;
     },
     loginFailure(state) {
-      state.status.loggedIn = false;
+      state.loggedIn = false;
       state.user = null;
     },
     logout(state) {
-      state.status.loggedIn = false;
+      state.loggedIn = false;
       state.user = null;
     },
     registerSuccess(state) {
       state.status.loggedIn = false;
     },
     registerFailure(state) {
-      state.status.loggedIn = false;
+      state.loggedIn = false;
     }
   }
 };

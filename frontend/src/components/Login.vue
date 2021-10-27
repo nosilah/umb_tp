@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-12">
-    <div class="card card-container">
+    <div class="card card-container ">
       <img
         id="profile-img"
         src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
@@ -13,7 +13,7 @@
             <ErrorMessage name="email" class="error-feedback" />
           </div>
         <div class="form-group">
-          <button class="btn btn-primary btn-block" :disabled="loading">
+          <button class="btn btn-outline-primary btn-block" :disabled="loading">
             <span
               v-show="loading"
               class="spinner-border spinner-border-sm"
@@ -63,7 +63,7 @@ export default {
   computed: {
     loggedIn() {
       
-      return this.$store.state.auth.status.loggedIn;
+      return this.$store.state.auth.loggedIn;
     },
   },
   created() {
@@ -124,7 +124,7 @@ label {
   border-radius: 2px;
   -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 20px 50px #5A009D;
 }
 
 .profile-img-card {

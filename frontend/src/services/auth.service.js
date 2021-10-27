@@ -3,17 +3,20 @@ import axios from 'axios';
 const API_URL = 'http://127.0.0.1:3001';
 
 class AuthService {
-  login() {
+  login(id, authkey) {
     return axios
-      .get(API_URL + '/api/auth/:id/:authkey')
-      .then(response => {
-        console.log(response);
-        // if (response.data.accessToken) {
-        //   localStorage.setItem('user', JSON.stringify(response.data));
+      .get(
+        `http://127.0.0.1:3001/api/auth/${id}/${authkey}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        // if (res.data.accessToken) {
+        //   localStorage.setItem("user", JSON.stringify(res.data));
+          // return res.data
         // }
-
-        return response.data;
+        return res.data
       });
+
   }
 
   logout() {
@@ -34,17 +37,17 @@ class AuthService {
         return response.data;
       });
   }
-  getAuthUser() {
-    return axios.get(API_URL + '/check_auth').then(response => {
-      console.log({
-        'user': response.data
-      })
-      if(response.data.email){
-        localStorage.setItem('user', JSON.stringify(response.data));
-      }
-      return response.data;
-    })
-  }
+  // getAuthUser() {
+  //   return axios.get(API_URL + '/check_auth').then(response => {
+  //     console.log({
+  //       'user': response.data
+  //     })
+  //     if (response.data.email) {
+  //       localStorage.setItem('user', JSON.stringify(response.data));
+  //     }
+  //     return response.data;
+  //   })
+  // }
 
 }
 

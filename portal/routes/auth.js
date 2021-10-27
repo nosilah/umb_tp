@@ -31,7 +31,7 @@ router.get('/api/auth/:id/:authkey/', async (req, res) => {
 
     console.log('get the link');
     console.log(responce);
-
+    console.log(req.url);
     if (responce.accessToken) {
        
         res.json({

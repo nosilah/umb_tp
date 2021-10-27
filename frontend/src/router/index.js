@@ -3,11 +3,13 @@ import { createWebHistory, createRouter } from "vue-router";
 import Home from "../components/Home.vue"
 import Login from "../components/Login.vue";
 import Register from "../components/Register.vue";
-import Test from "../components/Test.vue"
+import Auth from "../components/Auth.vue"
+
+
 import massage from "../components/Massage.vue"
 const Profile = () => import("../components/Profile.vue")
 
-const BoardUser = () => import("../components/BoardUser.vue")
+// const BoardUser = () => import("../components/BoardUser.vue")
 
 
 const routes = [
@@ -37,7 +39,7 @@ const routes = [
   {
     path: '/api/auth/:id/:authkey',
     // alias: "/api/auth/:id/:authkey",
-    component: Test
+    component: Auth
   },
  
   {
@@ -48,12 +50,12 @@ const routes = [
   },
  
 
-  {
-    path: "/user",
-    name: "user",
-    // lazy-loaded
-    component: BoardUser,
-  },
+  // {
+  //   path: "/user",
+  //   name: "user",
+  //   // lazy-loaded
+  //   component: BoardUser,
+  // },
 
 
 
