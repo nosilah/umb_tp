@@ -41,12 +41,12 @@ As an SMTP server I use locally [Mailhog](http://localhost:8025), you can check 
 ---
 ###   **Project includes**
 ```
+.
 ├── docker
 │   ├── mysql
 │   └── nginx
 ├── docker-compose.yml
-├── package.json
-├── portal
+├── frontend
 │   ├── babel.config.js
 │   ├── dist
 │   ├── Dockerfile
@@ -56,7 +56,18 @@ As an SMTP server I use locally [Mailhog](http://localhost:8025), you can check 
 │   ├── public
 │   ├── README.md
 │   ├── server
-│   └── src
+│   ├── src
+│   └── vue.config.js
+├── package.json
+├── portal
+│   ├── app.js
+│   ├── bin
+│   ├── node_modules
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── public
+│   ├── routes
+│   └── views
 ├── portalApi
 │   ├── app
 │   ├── artisan
@@ -77,4 +88,5 @@ As an SMTP server I use locally [Mailhog](http://localhost:8025), you can check 
 │   ├── vendor
 │   └── webpack.mix.js
 └── README.MD
+
 ```

@@ -16,7 +16,8 @@ class TemporaryLink extends Model
 
     protected $fillable = [
         'user_id',
-        'temporary_secret_code'
+        'temporary_secret_code',
+        'status'
     ];
 
 

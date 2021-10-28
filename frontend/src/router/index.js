@@ -8,6 +8,8 @@ import Auth from "../components/Auth.vue"
 
 import massage from "../components/Massage.vue"
 const Profile = () => import("../components/Profile.vue")
+const EditProfile = () => import("../components/EditProfile.vue")
+
 
 // const BoardUser = () => import("../components/BoardUser.vue")
 
@@ -47,6 +49,13 @@ const routes = [
     name: "profile",
     // lazy-loaded
     component: Profile,
+  },
+
+  {
+    path: "/edit-profile",
+    name: "edit-profile",
+    // lazy-loaded
+    component: EditProfile,
   },
  
 

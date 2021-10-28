@@ -15,7 +15,7 @@ class CreateTemporaryLinksTable extends Migration
     {
         Schema::create('temporary_links', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->uuid('user_id');
             $table->string('temporary_secret_code')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();

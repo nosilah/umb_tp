@@ -6,7 +6,7 @@ const logger = require('morgan');
 
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const userRouter = require('./routes/user');
 const authRouter = require('./routes/auth');
 const  history  = require('connect-history-api-fallback')
 
@@ -40,7 +40,7 @@ app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', userRouter);
 app.use('/', authRouter);
 
 // app.use('/api/auth/:id/:authkey', authRouter);

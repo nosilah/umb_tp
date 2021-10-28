@@ -15,7 +15,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use  HasFactory, Notifiable, HasApiTokens;
+    use  HasFactory, Notifiable, HasApiTokens, HasUuid;
 
     
     /**
@@ -29,8 +29,12 @@ class User extends Authenticatable
 
     protected $fillable = [
         'email',
+        'name'
     ];
 
+    public function AauthAcessToken(){
+        return $this->hasMany('\App\Models\OauthAccessToken');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -66,8 +70,8 @@ class User extends Authenticatable
     // }
     
 
-    // protected $primaryKey = 'uuid';
-    // protected $keyType = 'string';
+    protected $primaryKey = 'id';
+    protected $keyType = 'string';
     // public $incrementing = false;
 
 }

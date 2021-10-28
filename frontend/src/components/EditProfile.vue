@@ -1,24 +1,24 @@
 <template>
   <div class="col-md-12">
     <div class="card card-container ">
-      <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card"
-      />
-      <Form @submit="handleLogin" :validation-schema="schema">
+      <Form @submit="updateProfile" :validation-schema="schema">
         <div class="form-group">
-            <label for="email">Email</label>
-            <Field name="email" type="email" class="form-control" />
-            <ErrorMessage name="email" class="error-feedback" />
-          </div>
+          <label for="name">Name</label>
+          <Field name="name" type="text" class="form-control" />
+          <ErrorMessage name="name" class="error-feedback" />
+        </div>
         <div class="form-group">
-          <button class="btn btn-outline-primary btn-block" :disabled="loading">
+          <label for="email">Email</label>
+          <Field name="email" type="email" class="form-control" />
+          <ErrorMessage name="email" class="error-feedback" />
+        </div>
+        <div class="form-group">
+          <button class="btn btn-outline-success btn-block" :disabled="loading">
             <span
               v-show="loading"
               class="spinner-border spinner-border-sm"
             ></span>
-            <span>Login</span>
+            <span>Update</span>
           </button>
         </div>
 
@@ -31,13 +31,16 @@
     </div>
   </div>
 </template>
-
 <script>
+
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
+import { mapGetters } from "vuex";
+import axios from "axios";
+
 
 export default {
-  name: "Login",
+  name: "EditProfile",
   components: {
     Form,
     Field,
@@ -45,60 +48,51 @@ export default {
   },
   data() {
     const schema = yup.object().shape({
-       email: yup
+      email: yup
         .string()
         .required("Enter the email address!")
         .email("Email is invalid!")
         .max(50, "Must be maximum 50 characters!"),
-    
+      name: yup
+        .string("name must be only string")
+        .required("Etner your name")
+        .min(3, "Must be minimum 20 characters!")
+        .max(10, "Must be maximum 10 characters!"),
     });
 
     return {
       loading: false,
       message: "",
       schema,
-
     };
   },
   computed: {
-    loggedIn() {
-      
-      return this.$store.state.auth.loggedIn;
+    ...mapGetters(["auth/getAuthUser"]),
+
+    getAuthUser() {
+      return this["auth/getAuthUser"];
     },
   },
-  created() {
-    if (this.loggedIn) {
-      this.$router.push("/profile");
-    }
-  },
+
   methods: {
-    handleLogin(user) {
-      this.loading = false;
-
-      this.$store.dispatch("auth/register", user).then(
-        () => {
-          // this.$router.push("/profile");
-          // this.$router.push("massage");
-          // alert('check you email')
-          console.log('it is login');
-        },
-        (error) => {
-          this.loading = false;
-          this.message =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-        }
-      );
-
-     this.$router.push("massage");
-
+    updateProfile(user) {
+      axios
+        .post(
+          "api/user/update-profile",
+          {
+            id: this.getAuthUser.id,
+            name: user.name,
+            email: user.email,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: this.getAuthUser.accessToken,
+            },
+          }
+        )
+        .then((res) => console.log(res.data))
     },
-
-   
-
   },
 };
 </script>
@@ -124,7 +118,7 @@ label {
   border-radius: 2px;
   -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 20px 50px #5A009D;
+  box-shadow: 0px 20px 50px #5a009d;
 }
 
 .profile-img-card {

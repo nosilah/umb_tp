@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,18 +25,28 @@ use App\Http\Controllers\Api\LoginController;
 // Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'login']);
 
 
-Route::post('register', [\App\Http\Controllers\Auth\AuthController::class, 'CustomRegistration']);
+// Route::post('register', [\App\Http\Controllers\Auth\AuthController::class, 'CustomRegistration']);
 
-Route::post('getauthlink', [LoginController::class, 'getAuthlink']);
+Route::post('getauthlink', [AuthController::class, 'getAuthlink']);
 
-Route::get('/auth/{id}/{authCode}', [LoginController::class, 'login']);
+Route::get('/auth/{id}/{authCode}', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->get('/all', [UserController::class, 'test']);
 
 Route::get('/users', [UserController::class, 'index']);
 
-Route::middleware('auth:api')->get('/check_auth', function(){
-    return response(['status' => true ,
-'user' => Auth::user()
-]);
+Route::middleware('auth:api')->group(function () {
+    Route::post('/user/{id}/update-profile', [UserController::class, 'update']);
 });
+
+
+
+
+
+
+
+// get('/check_auth', function(){
+//     return response(['status' => true ,
+// 'user' => Auth::user()
+// ]);
+// });

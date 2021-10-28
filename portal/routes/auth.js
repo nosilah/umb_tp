@@ -37,6 +37,7 @@ router.get('/api/auth/:id/:authkey/', async (req, res) => {
         res.json({
             "id": responce.user.id,
             "email": responce.user.email,
+            "name": '',
             "accessToken": responce.accessToken
         })
     } else {
