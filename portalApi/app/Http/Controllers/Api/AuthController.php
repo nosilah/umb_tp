@@ -51,14 +51,14 @@ class AuthController extends Controller
         ]);
     }
 
-/**
- * params id, authCode from temporary link
- * @return 
- * object: user and accessToken if temporary link have actually prarams 
- * massage: is_overdue if link is overdue
- * massage: is_falid if link is falid 
- * 
- */
+    /**
+     * params id, authCode from temporary link
+     * @return 
+     * object: user and accessToken if temporary link have actually prarams 
+     * massage: is_overdue if link is overdue
+     * massage: is_falid if link is falid 
+     * 
+     */
 
 
     public function login($id, $authCode)
@@ -92,6 +92,14 @@ class AuthController extends Controller
     }
 
 
+
+    public function logout()
+    {
+
+        $user = Auth::user()->token();
+        $user->revoke();
+        return response()->json(["auhtuser" => Auth::user()]);
+    }
 
     /**
      * 

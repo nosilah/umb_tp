@@ -1,4 +1,6 @@
 import axios from 'axios';
+// import Header from './auth-header';
+
 
 const API_URL = 'http://127.0.0.1:3001';
 
@@ -6,23 +8,32 @@ class AuthService {
   login(id, authkey) {
     return axios
       .get(
-        `http://127.0.0.1:3001/api/auth/${id}/${authkey}`
+        API_URL + `/api/auth/${id}/${authkey}`
       )
       .then((res) => {
         console.log(res.data);
         // if (res.data.accessToken) {
         //   localStorage.setItem("user", JSON.stringify(res.data));
-          // return res.data
+        // return res.data
         // }
         return res.data
       });
 
   }
 
-  logout() {
-    axios.get(API_URL + '/logout').then(response => {
-      console.log("you are logout" + response)
+  async logout() {
+    let user = JSON.parse(localStorage.getItem('user'));
+
+    await axios.get(API_URL + '/logout', {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: user.accessToken
+      }
+    }).then(res => {
+      JSON.stringify(res)
+      console.log(res);
     })
+
     localStorage.removeItem('user');
   }
 

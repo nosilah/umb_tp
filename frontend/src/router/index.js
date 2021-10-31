@@ -5,21 +5,21 @@ import Login from "../components/Login.vue";
 import Register from "../components/Register.vue";
 import Auth from "../components/Auth.vue"
 
-
+import Test from "../components/Test.vue"
 import massage from "../components/Massage.vue"
 const Profile = () => import("../components/Profile.vue")
 const EditProfile = () => import("../components/EditProfile.vue")
 
-
+import { auth }  from "../store/auth.module"
 // const BoardUser = () => import("../components/BoardUser.vue")
 
 
 const routes = [
-  // {
-  //   path: "/test",
-  //   // alias: "/api/auth/:id/:authkey",
-  //   component: Test
-  // },
+  {
+    path: "/test",
+    // alias: "/api/auth/:id/:authkey",
+    component: Test
+  },
 
   {
     path: "/",
@@ -85,7 +85,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const publicPages = ['/user', '/profile'];
   const authRequired = publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem('user');
+  const loggedIn = auth.state.loggedIn;
 
 //   // trying to access a restricted page + not logged in
 //   // redirect to login page

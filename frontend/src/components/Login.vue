@@ -124,7 +124,7 @@ label {
   border-radius: 2px;
   -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 20px 50px #5A009D;
+  box-shadow: 0px 10px 30px #5A009D;
 }
 
 .profile-img-card {

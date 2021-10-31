@@ -1,7 +1,11 @@
 <template>
   <div class="col-md-12">
     <div class="card card-container ">
-      <Form @submit="updateProfile" :validation-schema="schema">
+      <Form
+        @submit="updateProfile"
+        :validation-schema="schema"
+        :initial-values="formValues"
+      >
         <div class="form-group">
           <label for="name">Name</label>
           <Field name="name" type="text" class="form-control" />
@@ -32,12 +36,10 @@
   </div>
 </template>
 <script>
-
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { mapGetters } from "vuex";
 import axios from "axios";
-
 
 export default {
   name: "EditProfile",
@@ -56,27 +58,41 @@ export default {
       name: yup
         .string("name must be only string")
         .required("Etner your name")
-        .min(3, "Must be minimum 20 characters!")
-        .max(10, "Must be maximum 10 characters!"),
+        .min(3, "Must be minimum 3 characters!")
+        .max(20, "Must be maximum 10 characters!"),
     });
+    const formValues = {
+      email: "",
+      name: "",
+    };
 
     return {
       loading: false,
       message: "",
       schema,
+      formValues,
     };
   },
   computed: {
     ...mapGetters(["auth/getAuthUser"]),
 
     getAuthUser() {
+      // console.log(this["auth/getAuthUser"]);
       return this["auth/getAuthUser"];
     },
+    getUser() {
+      console.log(this.getAuthUser.name);
+      return this.getAuthUser.name;
+    },
+  },
+  created() {
+    this.formValues.email = this.getAuthUser.email;
+    this.formValues.name = this.getAuthUser.name;
   },
 
   methods: {
-    updateProfile(user) {
-      axios
+    async updateProfile(user) {
+      await axios
         .post(
           "api/user/update-profile",
           {
@@ -91,8 +107,34 @@ export default {
             },
           }
         )
-        .then((res) => console.log(res.data))
+        .then((res) => {
+          // let data = {
+          //     id: this.getAuthUser.id,
+          //     name: res.data.name,
+          //     email: res.data.email,
+          //     accessToken: this.getAuthUser.accessToken,
+          // }
+          // console.log(data);
+          console.log(res.data.email);
+          localStorage.setItem(
+            "user",
+            JSON.stringify({
+              id: this.getAuthUser.id,
+              name: res.data.name ? res.data.name : this.getAuthUser.name,
+              email: res.data.email ? res.data.email : this.getAuthUser.email,
+              accessToken: this.getAuthUser.accessToken,
+            })
+          );
+        })
+        // .then(() => {
+        //   window.location.reload();
+        // })
+        .then(() => {
+          this.$router.push("/profile");
+        });
     },
+
+    updateLocalStorage() {},
   },
 };
 </script>
@@ -118,7 +160,7 @@ label {
   border-radius: 2px;
   -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 20px 50px #5a009d;
+  box-shadow: 0px 10px 30px #5a009d;
 }
 
 .profile-img-card {

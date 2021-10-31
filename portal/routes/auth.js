@@ -32,12 +32,13 @@ router.get('/api/auth/:id/:authkey/', async (req, res) => {
     console.log('get the link');
     console.log(responce);
     console.log(req.url);
+    
     if (responce.accessToken) {
        
         res.json({
             "id": responce.user.id,
             "email": responce.user.email,
-            "name": '',
+            "name": responce.user.name ? responce.user.name : '',
             "accessToken": responce.accessToken
         })
     } else {
@@ -49,6 +50,25 @@ router.get('/api/auth/:id/:authkey/', async (req, res) => {
 
 
 })
+
+
+router.get('/logout',async (req, res) => {
+
+    let responce = await fetch(`http://nginx/api/logout`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + req.headers['authorization']
+        }
+    }).then(res => res.json()).catch(err => console.log(err))
+
+
+    console.log(responce);
+
+    // console.log(req);
+    res.json(responce)
+
+} )
 
 router.get('/home', (req, res) => res.redirect('/'))
 

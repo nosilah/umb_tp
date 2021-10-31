@@ -12,7 +12,14 @@ class UserService {
     return axios.get(API_URL + 'user');
   }
 
+  // updateProfile(){ 
+    
+    
+  // return}
+
 }
+
+
 
 export default new UserService();
 

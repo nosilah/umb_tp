@@ -28,6 +28,9 @@ use App\Http\Controllers\Api\AuthController;
 // Route::post('register', [\App\Http\Controllers\Auth\AuthController::class, 'CustomRegistration']);
 
 Route::post('getauthlink', [AuthController::class, 'getAuthlink']);
+Route::get('/notAuth', function() {
+    return response()->json(['massage' => "not_authenticated"]);
+})->name('notAuth');
 
 Route::get('/auth/{id}/{authCode}', [AuthController::class, 'login']);
 
@@ -37,7 +40,12 @@ Route::get('/users', [UserController::class, 'index']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/user/{id}/update-profile', [UserController::class, 'update']);
+    Route::get('/test', function(){
+        return "goooooooood";
+    });
+    Route::get('/logout', [AuthController::class, 'logout']);
 });
+
 
 
 

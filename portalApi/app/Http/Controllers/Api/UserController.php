@@ -27,57 +27,6 @@ class UserController extends Controller
         return User::find(Auth::user());
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
 
@@ -85,11 +34,21 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        return response([
-            "data" => $request->all(),
-            "uuid" => $id
-        ]);
-        
+        if($user->update($request->all()) && $user->wasChanged()){
+
+            return response([
+                "massage" => "was_changed",
+                "data" => $request->all(),
+                // "id" => $id,
+                // "token" => Auth::user()->token()
+            ]);
+            
+        }else{
+
+            return response([
+                "massage" => "not_changed"
+            ]);
+        }
     }
 
     /**
