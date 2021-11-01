@@ -10,7 +10,7 @@
       <strong>Id:</strong>
       {{ currentUser.id }}
     </p> -->
-    <p>
+    <p v-if="user.name">
       <strong>Name:</strong>
       {{ user.name }}
     </p>

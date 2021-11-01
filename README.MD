@@ -24,7 +24,20 @@ docker exec -it portalapi php artisan passport:install
 ``` 
 
 ---
+
+## **URL App**
+
+
+URL app: <a href="http://127.0.0.1:3001">http://127.0.0.1:3001 </a>
+
+
  
+## **SMTP server**
+As an SMTP server I use only locally [Mailhog](http://localhost:8025), you can check received  messages by address <a href="http://localhost:8025">http://localhost:8025 </a>
+
+
+---
+
 ## **Additional notes**
 * ###   **show routing map**
 
@@ -34,9 +47,6 @@ docker exec -it portalapi php artisan route:list
 * ###   **for testing portalapi**
 
 for example in postaman you can use http://localhost:8081/ + url form routing map
-
-* ### **SMTP server**
-As an SMTP server I use locally [Mailhog](http://localhost:8025), you can check received  messages by address <a href="http://localhost:8025">http://localhost:8025 </a>
 
 ---
 ###   **Project includes**
@@ -55,7 +65,6 @@ As an SMTP server I use locally [Mailhog](http://localhost:8025), you can check 
 │   ├── package-lock.json
 │   ├── public
 │   ├── README.md
-│   ├── server
 │   ├── src
 │   └── vue.config.js
 ├── package.json
