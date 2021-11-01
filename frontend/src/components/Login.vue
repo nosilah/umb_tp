@@ -91,7 +91,7 @@ export default {
             error.message ||
             error.toString();
         }
-      );
+      )
 
      this.$router.push("massage");
 

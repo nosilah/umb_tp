@@ -31,7 +31,7 @@
         </button>
       </div>
       <div class="col-sm-2">
-        <button type="button" class="btn btn-danger" @click="deleteProfile">
+        <button type="button" class="btn btn-danger" @click="deleteProfile" disabled>
           Delete
         </button>
       </div>

@@ -34,7 +34,7 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        if($user->update($request->all()) && $user->wasChanged()){
+        if ($user->update($request->all()) && $user->wasChanged()) {
 
             return response([
                 "massage" => "was_changed",
@@ -42,8 +42,7 @@ class UserController extends Controller
                 // "id" => $id,
                 // "token" => Auth::user()->token()
             ]);
-            
-        }else{
+        } else {
 
             return response([
                 "massage" => "not_changed"

@@ -16,6 +16,11 @@ use Laravel\Passport\Bridge\AuthCode;
 class AuthController extends Controller
 {
 
+    /**
+     * @params $request->email
+     * send temporaray link to email 
+     * @return massage 
+     */
 
     public function getAuthlink(Request $request)
     {
@@ -92,23 +97,17 @@ class AuthController extends Controller
     }
 
 
+/**
+ * params 
+ * @return massage with success login
+ */
+    
 
     public function logout()
     {
-
         $user = Auth::user()->token();
         $user->revoke();
-        return response()->json(["auhtuser" => Auth::user()]);
+        return response()->json(["authUser" => "success logout"]);
     }
 
-    /**
-     * 
-     */
-    // public function logout(){
-    //     $user = Auth::user()->token();
-    //     $user->revoke();
-
-    //     return response()->json(["massage" => 
-    //     "logged out"]);
-    // }
 }

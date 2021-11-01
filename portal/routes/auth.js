@@ -2,7 +2,12 @@ const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch')
 
-/* GET users listing. */
+/**
+ * this to get auht link form poralApi and send it to email
+ * 
+ */
+
+
 router.post('/register', async (req, res) => {
 
     let email = req.body.email;
@@ -19,9 +24,16 @@ router.post('/register', async (req, res) => {
     }).then(res => res.json())
     // .catch(err => console.log(err))
 
-    console.log(responce.status);
+    // console.log(responce.status);
     res.json(responce)
 });
+
+
+/**
+ * this route to get accessToken token 
+ * the url was already was send to email 
+ * @return auth:user()
+ */
 
 router.get('/api/auth/:id/:authkey/', async (req, res) => {
 

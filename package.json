@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "app": "cd portalApi && composer install && cp .env.example .env && cd ../portal && npm install"
+    "app": "cd portalApi && composer install && cp .env.example .env && cd ../portal && npm install && cd ../frontend && npm install"
  
   },
   "repository": {
@@ -12,7 +12,7 @@
     "url": "git+https://github.com/nosilah/umb_tp.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Abdul",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/nosilah/umb_tp/issues"

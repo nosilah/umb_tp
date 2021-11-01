@@ -61,8 +61,7 @@ export default {
     };
   },
   computed: {
-    loggedIn() {
-      
+    loggedIn() {  
       return this.$store.state.auth.status.loggedIn;
     },
   },

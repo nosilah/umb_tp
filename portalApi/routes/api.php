@@ -28,15 +28,20 @@ use App\Http\Controllers\Api\AuthController;
 // Route::post('register', [\App\Http\Controllers\Auth\AuthController::class, 'CustomRegistration']);
 
 Route::post('getauthlink', [AuthController::class, 'getAuthlink']);
+// this route will be return massage to user if user not authenticated
 Route::get('/notAuth', function() {
     return response()->json(['massage' => "not_authenticated"]);
 })->name('notAuth');
+
 
 Route::get('/auth/{id}/{authCode}', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->get('/all', [UserController::class, 'test']);
 
 Route::get('/users', [UserController::class, 'index']);
+
+
+
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/user/{id}/update-profile', [UserController::class, 'update']);

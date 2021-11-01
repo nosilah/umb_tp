@@ -3,6 +3,11 @@ const router = express.Router();
 const fetch = require('node-fetch')
 
 
+/**
+ * this route for update the user profile and can be work only if user is   authorzated
+ * @return object updated users 
+ */
+
 router.post('/api/user/update-profile', async (req, res) => {
 
     // let email = req.body.email;
