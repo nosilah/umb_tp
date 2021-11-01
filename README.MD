@@ -7,7 +7,7 @@ npm run app
 ```
 ## 2. Create and start containers with project
 ```
-docker-compose up -d
+docker-compose up --build -d
 ```
 
 ## 3. Run migrations 
