@@ -22,6 +22,13 @@ Only after successfully runed migrations, for auth-service in portalapi I use la
 ```
 docker exec -it portalapi php artisan passport:install
 ```
+## 5. If will be errors with permissions  in poeralApi container you can run:
+
+```
+docker exec -it portalapi chown -R www-data:www-data ./storage
+
+```
+---
 ---
 
 
@@ -37,13 +44,7 @@ URL app: <a href="http://127.0.0.1:3001">http://127.0.0.1:3001 </a>
 As an SMTP server I use only locally [Mailhog](http://localhost:8025), you can check received  messages by address <a href="http://localhost:8025">http://localhost:8025 </a>
 
 
----
-## If will be errors with permissions  in poeralApi container you can run:
 
-```
-docker exec -it portalapi chown -R www-data:www-data ./storage
-
-```
 ---
 
 ## **Additional notes**
