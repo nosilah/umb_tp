@@ -22,7 +22,7 @@ Only after successfully runed migrations, for auth-service in portalapi I use la
 ```
 docker exec -it portalapi php artisan passport:install
 ```
-## 5. If will be errors with permissions  in poeralApi container you can run:
+## 5. If will be errors with permissions  in portalApi container you can run:
 
 ```
 docker exec -it portalapi chown -R www-data:www-data ./storage
