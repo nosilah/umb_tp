@@ -69,6 +69,7 @@ npm run build
 ---
 ###   **Project includes**
 ```
+test-project
 .
 ├── docker
 │   ├── mysql
@@ -77,7 +78,6 @@ npm run build
 ├── frontend
 │   ├── babel.config.js
 │   ├── dist
-│   ├── Dockerfile
 │   ├── node_modules
 │   ├── package.json
 │   ├── package-lock.json
@@ -89,6 +89,7 @@ npm run build
 ├── portal
 │   ├── app.js
 │   ├── bin
+│   ├── Dockerfile
 │   ├── node_modules
 │   ├── package.json
 │   ├── package-lock.json
@@ -115,5 +116,6 @@ npm run build
 │   ├── vendor
 │   └── webpack.mix.js
 └── README.MD
+
 
 ```
