@@ -21,9 +21,10 @@ docker exec -it portalapi php artisan migrate
 Only after successfully runed migrations, for auth-service in portalapi I use laravel/passport and you have to run the commands necessary to prepare Passport for use
 ```
 docker exec -it portalapi php artisan passport:install
-``` 
-
+```
 ---
+
+
 
 ## **URL App**
 
@@ -37,8 +38,17 @@ As an SMTP server I use only locally [Mailhog](http://localhost:8025), you can c
 
 
 ---
+## If will be errors with permissions  in poeralApi container you can run:
+
+```
+docker exec -it portalapi chown -R www-data:www-data ./storage
+
+```
+---
 
 ## **Additional notes**
+
+* ### **Temporaray link time you can set in /portalApi/.env SENTIVE_TIME=(time in sec) default time is 60 sec**
 * ###   **show routing map**
 
 ```
